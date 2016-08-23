@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<!--<script src="./d3/d3.v3.js"></script>-->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+
+	</head>
+	<body>
+		
+		<button type="button" onclick="createBars()" >Click Me!</button>
+		
+		<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+			<g transform="translate(0,500) scale(1,-1)">
+			</g>
+		</svg>
+
+		<script type="text/javascript">
+			var dataset = [];
+			
+			function createBars(){
+				console.log("started.");
+								
+				dataset = [];
+				
+				d3.select("g").selectAll("rect").data(dataset).exit().remove();
+					
+				
+				for (i = 0 ; i < 10 ; i++){
+						
+						var random = Math.floor(Math.random()*10+1);
+						console.log("generated element: "+random);
+						dataset.push(random);
+				}
+				
+				d3.select("g").selectAll("rect").data(dataset).enter().append("rect")
+				.attr("x", function(d, i) {
+					return i * (500 / dataset.length);
+				})
+				.attr("y", 0)
+				.attr("width", 20)
+				.attr("height", function(i){
+					return i * (500 / dataset.length);
+				})
+				.attr("style","fill:rgb(0,0,255);")
+				;
+							
+			}
+				
+		</script>
+	</body>
+</html>
