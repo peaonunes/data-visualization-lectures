@@ -1,0 +1,51 @@
+<html>
+	<head>
+		<!--<script src="./d3/d3.v3.js"></script>-->
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+
+	</head>
+	<body>
+		
+		<button type="button" onclick="fillTable()" >Click Me!</button>
+		
+		<table style="width:100%">
+		</table>
+		
+		</br>
+		</br>
+		</br>		
+
+		<svg width="500" height="500" xmlns="http://www.w3.org/2000/svg">
+			<g transform="translate(0,500) scale(1,-1)">
+			</g>
+		</svg>
+
+		<script type="text/javascript">
+			var dataset = [];
+			var i = 0; 
+			
+			function fillTable(){
+				dataset = [];
+				
+				d3.select("table").selectAll("tr").data(dataset).exit().remove();
+				
+				if(i == 0) {
+					dataset = [[1,2,3],[4,5,6],[7,8,9]];
+					i = 1;
+				} else {
+					dataset = [[10,11,12],[4,5,6],[7,8,9]];
+					i = 0;
+				}
+					
+				d3.select("table").selectAll("tr").data(dataset).enter().append("tr").each(function (d){
+					d3.select(this).append("td").text(d[0]);
+					d3.select(this).append("td").text(d[1]);
+					d3.select(this).append("td").text(d[2]);
+				});
+				
+											
+			}
+				
+		</script>
+	</body>
+</html>
